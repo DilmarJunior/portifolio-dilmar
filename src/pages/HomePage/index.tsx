@@ -1,4 +1,4 @@
-import NavbarComponent from "@/app/components/Navbar";
+import NavbarComponent from "@/components/Navbar";
 
 export default function HomePage() {
   return (

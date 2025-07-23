@@ -85,7 +85,6 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   useEffect(() => { 
     const handleResize = () => {
       const width = window.innerWidth;
-      console.log("Window width:", width);
       const newScreenSize = { 
         mobile: width < 640,
         tablet: width >= 640 && width < 1024,

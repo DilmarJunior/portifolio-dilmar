@@ -1,6 +1,6 @@
 import MenuComponent from "../Menu";
 import style from "./style.module.css";
-import Icon from "@/app/components/Icons";
+import Icon from "@/components/Icons";
 
 export default function NavbarComponent() {
   return (
