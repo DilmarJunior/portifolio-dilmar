@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {NextIntlClientProvider} from 'next-intl';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import "./globals.css";
 
 
@@ -19,7 +20,9 @@ export default function RootLayout({
         className={'antialiased'}
       >
         <NextIntlClientProvider>
-          {children}
+          <AppRouterCacheProvider>
+            {children}
+          </AppRouterCacheProvider>
         </NextIntlClientProvider>
       </body>
     </html>
