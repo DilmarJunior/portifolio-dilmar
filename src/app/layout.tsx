@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import {NextIntlClientProvider} from 'next-intl';
 import "./globals.css";
 
 
@@ -17,7 +18,9 @@ export default function RootLayout({
       <body
         className={'antialiased'}
       >
-        {children}
+        <NextIntlClientProvider>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
