@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { getTranslations } from "next-intl/server";
+import HeaderComponent from "./components/header";
 import "../globals.css";
 
 type Props = {
@@ -28,11 +29,11 @@ export async function generateMetadata({
     notFound();
   }
 
-  const translations = await getTranslations({ locale, namespace: "metadata" });
+  const tr = await getTranslations({ locale, namespace: "metadata" });
 
   return {
-    title: translations("meta-title"),
-    description: translations("meta-description"),
+    title: tr("meta-title"),
+    description: tr("meta-description"),
   };
 }
 
@@ -52,7 +53,10 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className="antialiased">
         <NextIntlClientProvider>
-          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+          <AppRouterCacheProvider>
+            <HeaderComponent />
+            {children}
+          </AppRouterCacheProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -2,5 +2,13 @@
   "metadata": {
     "meta-title": "Portifolio - Dilmar Mendes Silva Carvalho",
     "meta-description": "Portfolio of Dilmar Mendes Silva Carvalho, full stack mobile software developer. Includes projects, experiences, and professional resume."
-  }
+  },
+  "home": "Home",
+  "about": "About",
+  "projects": "Projects",
+  "resume": "Resume",
+  "contact-me": "Contact Me",
+  "got-to-details-about": "Go to detail about",
+  "got-to-details-projects": "Go to detail projects",
+  "got-to-details-resume": "Go to detail resume"
 }
