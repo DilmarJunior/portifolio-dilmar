@@ -2,8 +2,8 @@
 import { LocalButtonProps } from "../types/LocalButtonProps";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import Menu, { MenuProps } from "@mui/material/Menu";
+import MenuItem, { MenuItemProps } from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 
 type MenuItemType = {
@@ -14,6 +14,8 @@ type MenuItemType = {
 type LocalButtonMenuProps = LocalButtonProps & {
   idMenu: string;
   listItems: MenuItemType[];
+  menuProps?: MenuProps;
+  menuItemProps?: MenuItemProps;
 };
 
 export default function LocalButtonMenu({
@@ -73,6 +75,7 @@ export default function LocalButtonMenu({
         slotProps={{
           list: { "aria-labelledby": id },
         }}
+        {...props.menuProps}
       >
         {listItems.map((listItem) => (
           <MenuItem
@@ -81,6 +84,7 @@ export default function LocalButtonMenu({
               listItem.functionItem();
               handleClose();
             }}
+            {...props.menuItemProps}
           >
             {listItem.label}
           </MenuItem>

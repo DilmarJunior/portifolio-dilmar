@@ -7,5 +7,6 @@ export  type LocalButtonProps = ButtonProps & IconButtonProps & {
   label?: string;
   isIconButton?: boolean; 
   icon?:  React.ReactNode;
+  typeButton?: "primary" | "secondary";
   functionPress?: () => void;
 };

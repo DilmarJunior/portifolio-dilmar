@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-:root {
+
+@theme inline {
   --color-background: #F5F5F5;
   --color-foreground: #171717;
 
@@ -9,11 +10,10 @@
   --color-primary-3: #0702C0;
   --color-primary-4: #0B03DE;
   --color-primary-5: #0F04FC;
-}
 
-@theme inline {
-  --color-background: var(--color-background);
-  --color-foreground: var(--color-foreground);
+  --color-secondary-1: #F5F5F5;
+  --color-secondary-2: #EBEBEB;
+  --color-secondary-3: #DEDEDE;
 }
 
 /* @media (prefers-color-scheme: dark) {

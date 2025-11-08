@@ -13,7 +13,28 @@ export default function HeaderComponent() {
   const navigateToDetail = (link: string) => {
     console.log("link -> ", link);
   };
-  const menus = ["home", "about", "projects", "resume"];
+  const menus = [
+    {
+      name: "home",
+      hasDetail: false,
+      link: "/",
+    },
+    {
+      name: "about",
+      hasDetail: true,
+      link: "#about",
+    },
+    {
+      name: "projects",
+      hasDetail: true,
+      link: "#projects",
+    },
+    {
+      name: "resume",
+      hasDetail: true,
+      link: "#resume",
+    },
+  ];
 
   return (
     <header className="flex w-full justify-between items-center h-14 px-6">
@@ -25,25 +46,34 @@ export default function HeaderComponent() {
 
       <nav className="flex justify-between w-1/3">
         {menus.map((menu) => (
-          <div className="flex items-center" key={`menu-${menu}`}>
+          <div className="flex items-center" key={`menu-${menu.name}`}>
             <Link
-              href={menu === "home" ? "/" : `#${menu}`}
-              className="text-lg font-semibold text-gray-800 hover:text-blue-600 active:text-blue-800 transition-colors"
+              href={menu.link}
+              className="text-md font-semibold text-[var(--color-foreground)] hover:text-[var(--color-primary-1)] active:text-[var(--color-primary-2)] transition-colors"
             >
-              {tr(menu)}
+              {tr(menu.name)}
             </Link>
-            {menu !== "home" && (
+            {menu.hasDetail && (
               <LocalButtonMenu
-                id={`local-button-menu-${menu}-details`}
-                idMenu={`local-button-menu-${menu}-menu-details`}
+                id={`local-button-menu-${menu.name}-details`}
+                idMenu={`local-button-menu-${menu.name}-menu-details`}
                 listItems={[
                   {
-                    label: tr(`got-to-details-${menu}`),
-                    functionItem: () => navigateToDetail(menu),
+                    label: tr(`got-to-details-${menu.name}`),
+                    functionItem: () => navigateToDetail(menu.link),
                   },
                 ]}
                 isIconButton
                 icon={<ArrowDropDownIcon />}
+                sx={{
+                  padding: 0,
+                  color: "var(--color-foreground)]",
+                  "&:hover": {
+                    color: "var(--color-primary-1)",
+                    backgroundColor: "transparent",
+                  },
+                  "&:active": { color: "var(--color-primary-2)" },
+                }}
               />
             )}
           </div>
@@ -52,6 +82,7 @@ export default function HeaderComponent() {
       <div>
         <LocalButton
           variant="contained"
+          typeButton="primary"
           endIcon={<ArrowForwardIcon />}
           label={tr("contact-me")}
           sx={{
