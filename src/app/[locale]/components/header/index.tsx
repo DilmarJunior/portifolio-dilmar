@@ -1,52 +1,109 @@
 "use client";
-
 import { useTranslations } from "next-intl";
 import LocalButton from "@/app/[locale]/components/localButton";
 import LocalButtonMenu from "@/app/[locale]/components/localButtonMenu";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import MenuIcon from "@mui/icons-material/Menu";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Link from "next/link";
+import { MenuItem } from "@/app/[locale]/components/types/MenuItem";
+
+import { useEffect, useState } from "react";
 
 export default function HeaderComponent() {
   const tr = useTranslations();
-  const navigateToDetail = (link: string) => {
+  const navigateTo = (link: string) => {
     console.log("link -> ", link);
   };
-  const menus = [
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const menus: MenuItem[] = [
     {
       name: "home",
       hasDetail: false,
       link: "/",
+      type: "normal",
     },
     {
       name: "about",
       hasDetail: true,
       link: "#about",
+      type: "accordion",
     },
     {
       name: "projects",
       hasDetail: true,
       link: "#projects",
+      type: "accordion",
     },
     {
       name: "resume",
       hasDetail: true,
       link: "#resume",
+      type: "accordion",
     },
   ];
 
+  const menuItemContact = {
+    name: "contact-me",
+    hasDetail: false,
+    link: "#contact-me",
+    style: {
+      backgroundColor: "var(--color-primary-1)",
+      color: "var(--color-secondary-1)",
+    },
+    icon: <ArrowForwardIcon />,
+    type: "normal",
+  };
+
+  const getListItensMenuMobile = (menu: MenuItem[]) => {
+    const newMenu = [...menu, menuItemContact];
+
+    return newMenu.map((menu) => ({
+      label: tr(menu.name),
+      type: menu.type as "normal" | "accordion",
+      functionItem: () => navigateTo(menu.link),
+      ...(menu.style ? { style: menu.style } : {}),
+      ...(menu.icon ? { icon: menu.icon } : {}),
+      subLabels: [
+        {
+          label: tr(`got-to-details-${menu.name}`),
+          functionItem: () => navigateTo(menu.link),
+        },
+      ],
+    }));
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsOpenMenu(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <header className="flex w-full justify-between items-center h-14 px-6">
-      <div>
+    <header className="grid grid-cols-3 md:flex md:justify-between w-full items-center h-14 px-6">
+      <div className="col-start-2 flex justify-center md:col-start-1 md:justify-start">
         <a>
           <h1>Logo</h1>
         </a>
       </div>
 
-      <nav className="flex justify-between w-1/3">
+      <nav className="hidden md:flex justify-between w-1/3">
         {menus.map((menu) => (
-          <div className="flex items-center" key={`menu-${menu.name}`}>
+          <div
+            className={`flex items-center ${
+              menu.hasDetail ? "min-w-22" : "min-w-16"
+            }`}
+            key={`menu-${menu.name}`}
+          >
             <Link
               href={menu.link}
               className="text-md font-semibold text-[var(--color-foreground)] hover:text-[var(--color-primary-1)] active:text-[var(--color-primary-2)] transition-colors"
@@ -60,7 +117,7 @@ export default function HeaderComponent() {
                 listItems={[
                   {
                     label: tr(`got-to-details-${menu.name}`),
-                    functionItem: () => navigateToDetail(menu.link),
+                    functionItem: () => navigateTo(menu.link),
                   },
                 ]}
                 isIconButton
@@ -79,7 +136,7 @@ export default function HeaderComponent() {
           </div>
         ))}
       </nav>
-      <div>
+      <div className="hidden md:flex">
         <LocalButton
           variant="contained"
           typeButton="primary"
@@ -90,6 +147,24 @@ export default function HeaderComponent() {
             textTransform: "none",
             paddingX: 2,
             paddingY: 0.5,
+          }}
+        />
+      </div>
+
+      <div className="block md:hidden col-start-3 flex justify-end">
+        <LocalButtonMenu
+          id="local-button-menu-nav"
+          idMenu="local-button-menu-nav-menu"
+          listItems={getListItensMenuMobile(menus)}
+          onOpen={() => setIsOpenMenu(true)}
+          onClose={() => setIsOpenMenu(false)}
+          isIconButton
+          icon={isOpenMenu ? <MenuOpenIcon /> : <MenuIcon />}
+          slotPropsListMenuStyle={{
+            paddingBottom: 0,
+          }}
+          menuProps={{
+            open: isOpenMenu,
           }}
         />
       </div>
