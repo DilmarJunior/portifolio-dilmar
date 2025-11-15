@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "meta-title": "Portafolio - Dilmar Mendes Silva Carvalho",
+    "meta-description": "Portafolio de Dilmar Mendes Silva Carvalho, desarrollador de software full stack móvil. Incluye proyectos, experiencia y currículum profesional."
+  },
+  "home": "Inicio",
+  "about": "Sobre mí",
+  "projects": "Proyectos",
+  "resume": "Currículum",
+  "contacts": "Contactos",
+  "contact-me": "Contáctame",
+  "got-to-details-about": "Ir a los detalles sobre",
+  "got-to-details-projects": "Ir a los detalles de proyectos",
+  "got-to-details-resume": "Ir a los detalles del currículum",
+  "got-to-section-about": "Ir a la sección sobre mí",
+  "got-to-section-projects": "Ir a la sección de proyectos",
+  "got-to-section-resume": "Ir a la seção del currículum"
+}

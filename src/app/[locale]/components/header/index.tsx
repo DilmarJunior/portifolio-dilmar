@@ -109,7 +109,7 @@ export default function HeaderComponent() {
         {menus.map((menu) => (
           <div
             className={`flex items-center ${
-              menu.hasDetail ? "min-w-22" : "min-w-16"
+              menu.hasDetail ? "min-w-26" : "min-w-16"
             }`}
             key={`menu-${menu.name}`}
           >
