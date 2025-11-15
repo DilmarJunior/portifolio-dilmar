@@ -52,6 +52,7 @@ export default function HeaderComponent() {
     style: {
       backgroundColor: "var(--color-primary-1)",
       color: "var(--color-secondary-1)",
+      minHeight: "45px",
     },
     icon: <ArrowForwardIcon />,
     type: "normal",
@@ -66,12 +67,20 @@ export default function HeaderComponent() {
       functionItem: () => navigateTo(menu.link),
       ...(menu.style ? { style: menu.style } : {}),
       ...(menu.icon ? { icon: menu.icon } : {}),
-      subLabels: [
-        {
-          label: tr(`got-to-details-${menu.name}`),
-          functionItem: () => navigateTo(menu.link),
-        },
-      ],
+      ...(menu.hasDetail
+        ? {
+            subItems: [
+              {
+                label: tr(`got-to-section-${menu.name}`),
+                functionItem: () => navigateTo(menu.link),
+              },
+              {
+                label: tr(`got-to-details-${menu.name}`),
+                functionItem: () => navigateTo(menu.link),
+              },
+            ],
+          }
+        : {}),
     }));
   };
 

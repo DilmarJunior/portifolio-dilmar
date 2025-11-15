@@ -100,16 +100,43 @@ export default function LocalButtonMenu({
       >
         {listItems.map((listItem) =>
           listItem.type === "accordion" ? (
-            <Accordion key={listItem.label}>
+            <Accordion
+              key={listItem.label}
+              sx={{
+                "&::before": {
+                  display: "none",
+                },
+                border: "none",
+                boxShadow: "none",
+              }}
+            >
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1-content"
                 id="panel1-header"
+                sx={{
+                  transition: "box-shadow 0.2s ease",
+                  minHeight: "35px",
+
+                  "&.Mui-expanded": {
+                    minHeight: "35px",
+                    boxShadow: "0px 4px 6px -2px rgba(0,0,0,0.25)",
+                    zIndex: 2,
+                  },
+                }}
               >
                 <Typography component="span">{listItem.label}</Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                {listItem.subItems?.map((subItem) => (
+
+              {listItem.subItems?.map((subItem, index) => (
+                <AccordionDetails
+                  key={subItem.label}
+                  sx={{
+                    padding: "5px 0px 5px 0px",
+                    backgroundColor: "var(--color-background)",
+                    borderBottom: "1px solid #ccc",
+                  }}
+                >
                   <MenuItem
                     key={subItem.label}
                     onClick={() => {
@@ -122,8 +149,8 @@ export default function LocalButtonMenu({
                     {subItem.label}
                     {subItem.icon && subItem.icon}
                   </MenuItem>
-                ))}
-              </AccordionDetails>
+                </AccordionDetails>
+              ))}
             </Accordion>
           ) : (
             <MenuItem
@@ -133,7 +160,7 @@ export default function LocalButtonMenu({
                 handleClose();
               }}
               {...props.menuItemProps}
-              sx={{ ...listItem.style }}
+              sx={{ minHeight: "35px", ...listItem.style }}
             >
               {listItem.label}
               {listItem.icon && listItem.icon}

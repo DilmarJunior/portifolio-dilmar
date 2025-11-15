@@ -4,5 +4,5 @@ export type MenuItem = {
   link: string;
   style?: Record<string, unknown>;
   icon?: React.ReactNode;
-  type?: "normal" | "accordion"
+  type?: "normal" | "accordion";
 }
