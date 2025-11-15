@@ -117,9 +117,11 @@ export default function LocalButtonMenu({
                 sx={{
                   transition: "box-shadow 0.2s ease",
                   minHeight: "35px",
+                  height: "40px",
 
                   "&.Mui-expanded": {
                     minHeight: "35px",
+                    height: "40px",
                     boxShadow: "0px 4px 6px -2px rgba(0,0,0,0.25)",
                     zIndex: 2,
                   },
@@ -160,7 +162,7 @@ export default function LocalButtonMenu({
                 handleClose();
               }}
               {...props.menuItemProps}
-              sx={{ minHeight: "35px", ...listItem.style }}
+              sx={{ minHeight: "40px", ...listItem.style }}
             >
               {listItem.label}
               {listItem.icon && listItem.icon}
