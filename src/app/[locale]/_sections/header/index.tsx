@@ -1,14 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
-import LocalButton from "@/app/[locale]/components/localButton";
-import LocalButtonMenu from "@/app/[locale]/components/localButtonMenu";
+import LocalButton from "@/app/[locale]/_components/localButton";
+import LocalButtonMenu from "@/app/[locale]/_components/localButtonMenu";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Link from "next/link";
-import { MenuItem } from "@/app/[locale]/components/types/MenuItem";
+import { MenuItem } from "@/app/[locale]/_components/types/MenuItem";
 
 import { useEffect, useState } from "react";
 

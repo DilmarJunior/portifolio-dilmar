@@ -5,7 +5,7 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { getTranslations } from "next-intl/server";
-import HeaderComponent from "./components/header";
+import HeaderComponent from "./_sections/header";
 import "../globals.css";
 
 type Props = {
