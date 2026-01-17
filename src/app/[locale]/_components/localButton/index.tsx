@@ -1,6 +1,5 @@
 import { Button, IconButton } from "@mui/material";
 import { LocalButtonProps } from "../types/LocalButtonProps";
-import React from "react";
 
 export default function LocalButton({
   startIcon,

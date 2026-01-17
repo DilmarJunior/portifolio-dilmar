@@ -5,7 +5,7 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { getTranslations } from "next-intl/server";
-import HeaderComponent from "./_sections/header";
+import HeaderSection from "./_sections/header";
 import "../globals.css";
 
 type Props = {
@@ -54,7 +54,7 @@ export default async function LocaleLayout({
       <body className="antialiased">
         <NextIntlClientProvider>
           <AppRouterCacheProvider>
-            <HeaderComponent />
+            <HeaderSection />
             {children}
           </AppRouterCacheProvider>
         </NextIntlClientProvider>

@@ -12,7 +12,7 @@ import { MenuItem } from "@/app/[locale]/_components/types/MenuItem";
 
 import { useEffect, useState } from "react";
 
-export default function HeaderComponent() {
+export default function HeaderSection() {
   const tr = useTranslations();
   const navigateTo = (link: string) => {
     console.log("link -> ", link);
@@ -98,7 +98,10 @@ export default function HeaderComponent() {
   }, []);
 
   return (
-    <header className="grid grid-cols-3 md:flex md:justify-between w-full items-center h-14 px-6">
+    <header
+      id="header-site"
+      className="grid grid-cols-3 md:flex md:justify-between w-full items-center h-14 px-10 shadow-sm"
+    >
       <div className="col-start-2 flex justify-center md:col-start-1 md:justify-start">
         <a>
           <h1>Logo</h1>
