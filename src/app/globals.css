@@ -4,13 +4,17 @@
 @theme inline {
   --color-background: #080C16;
   --color-background-2: #102533;
-  --color-foreground: #182544;
+  --color-background-3: #0E2532;
+  --color-background-4: #0D1323;
+  --color-background-5: #10192D;
+
+  --color-foreground-1: #182544;
+  --color-foreground-2: #157A8E;
 
   --color-primary-1: #06E1FF;
   --color-primary-2: #18CEFF;
   --color-primary-3: #3FA9FF;
   --color-primary-4: #030047;
-
 
   --color-secondary-1: #080D17;
 
@@ -18,6 +22,8 @@
 
   --color-white-1: #FFFFFF;
   --color-white-2: #F5F5F5;
+
+  --color-primary-font: #A3B0C1;
 }
 
 /* @media (prefers-color-scheme: dark) {
