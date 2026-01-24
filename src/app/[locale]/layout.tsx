@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { getTranslations } from "next-intl/server";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import HeaderSection from "./_sections/header";
 import "../globals.css";
 
@@ -37,6 +38,20 @@ export async function generateMetadata({
   };
 }
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export default async function LocaleLayout({
   children,
   params,
@@ -50,8 +65,8 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale}>
-      <body className="antialiased">
+    <html lang={locale} className={`${inter.variable} ${jetbrains.variable}`}>
+      <body className="antialiased font-sans">
         <NextIntlClientProvider>
           <AppRouterCacheProvider>
             <HeaderSection />
