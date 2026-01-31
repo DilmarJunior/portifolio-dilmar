@@ -25,6 +25,7 @@ type LocalButtonMenuProps = LocalButtonProps & {
   listItems: MenuItemType[];
   menuProps?: MenuProps;
   menuItemProps?: MenuItemProps;
+  iconButtonStyle?: object;
   slotPropsListMenuStyle?: Record<string, unknown>;
   onOpen?: () => void;
   onClose?: () => void;
@@ -39,6 +40,7 @@ export default function LocalButtonMenu({
   isIconButton = false,
   icon,
   listItems,
+  iconButtonStyle,
   slotPropsListMenuStyle,
   menuProps,
   onOpen,
@@ -67,6 +69,10 @@ export default function LocalButtonMenu({
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
           {...props}
+          style={{
+            color: "var(--color-primary-font)",
+            ...iconButtonStyle,
+          }}
         >
           {icon}
         </IconButton>
@@ -91,9 +97,20 @@ export default function LocalButtonMenu({
         open={open}
         onClose={handleClose}
         slotProps={{
+          paper: {
+            sx: {
+              borderRadius: 2,
+              padding: 0.2,
+              backgroundColor: "var(--color-foreground-2)",
+            },
+          },
           list: {
             "aria-labelledby": id,
-            sx: { ...slotPropsListMenuStyle },
+            sx: {
+              ...slotPropsListMenuStyle,
+              backgroundColor: "var(--color-background-5)",
+              borderRadius: 2,
+            },
           },
         }}
         {...menuProps}
@@ -125,6 +142,17 @@ export default function LocalButtonMenu({
                     boxShadow: "0px 4px 6px -2px rgba(0,0,0,0.25)",
                     zIndex: 2,
                   },
+
+                  "& .MuiAccordionSummary-expandIconWrapper": {
+                    color: "var(--color-primary-1)",
+                  },
+
+                  "&.Mui-expanded .MuiAccordionSummary-expandIconWrapper": {
+                    color: "var(--color-primary-2)",
+                  },
+
+                  backgroundColor: "var(--color-background-5)",
+                  color: "var(--color-primary-font)",
                 }}
               >
                 <Typography component="span">{listItem.label}</Typography>
@@ -135,8 +163,9 @@ export default function LocalButtonMenu({
                   key={subItem.label}
                   sx={{
                     padding: "5px 0px 5px 0px",
-                    backgroundColor: "var(--color-background)",
-                    borderBottom: "1px solid #ccc",
+                    borderBottom: "1px solid var(--color-foreground-1)",
+                    backgroundColor: "var(--color-background-6)",
+                    color: "var(--color-primary-font)",
                   }}
                 >
                   <MenuItem
@@ -162,12 +191,17 @@ export default function LocalButtonMenu({
                 handleClose();
               }}
               {...props.menuItemProps}
-              sx={{ minHeight: "40px", ...listItem.style }}
+              sx={{
+                minHeight: "40px",
+                backgroundColor: "var(--color-background-5)",
+                color: "var(--color-primary-font)",
+                ...listItem.style,
+              }}
             >
               {listItem.label}
               {listItem.icon && listItem.icon}
             </MenuItem>
-          )
+          ),
         )}
       </Menu>
     </div>

@@ -52,9 +52,18 @@ export default function HeaderSection() {
     hasDetail: false,
     link: "#contact-me",
     style: {
-      backgroundColor: "var(--color-primary-1)",
+      background: `
+        linear-gradient(
+          90deg,
+          var(--color-primary-1),
+          var(--color-primary-2),
+          var(--color-primary-3)
+        )`,
       color: "var(--color-secondary-1)",
       minHeight: "45px",
+      borderBottomLeftRadius: 2,
+      borderBottomRightRadius: 2,
+      fontWeight: "bold",
     },
     icon: <ArrowForwardIcon />,
     type: "normal",
@@ -151,7 +160,7 @@ export default function HeaderSection() {
       <nav className="hidden md:flex justify-between">
         {menus.map((menu) => (
           <div
-            className={"flex items-center justify-center min-w-25"}
+            className={`flex items-center justify-center ${menu.hasDetail ? "min-w-27" : "min-w-22"}`}
             key={`menu-${menu.name}`}
           >
             <Link
