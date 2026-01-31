@@ -70,7 +70,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider>
           <AppRouterCacheProvider>
             <HeaderSection />
-            {children}
+            <div className="pt-14">{children}</div>
           </AppRouterCacheProvider>
         </NextIntlClientProvider>
       </body>

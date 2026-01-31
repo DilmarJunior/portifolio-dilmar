@@ -11,6 +11,7 @@ import Link from "next/link";
 import { MenuItem } from "@/app/[locale]/_components/types/MenuItem";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function HeaderSection() {
   const tr = useTranslations();
@@ -18,6 +19,7 @@ export default function HeaderSection() {
     console.log("link -> ", link);
   };
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const menus: MenuItem[] = [
     {
       name: "home",
@@ -91,34 +93,70 @@ export default function HeaderSection() {
       }
     };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
 
-    return () => window.removeEventListener("resize", handleResize);
+    handleResize();
+    handleScroll();
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
     <header
       id="header-site"
-      className="grid grid-cols-3 md:flex md:justify-between w-full items-center h-14 px-10 shadow-sm"
+      className={`
+        fixed top-0 left-0 z-50
+        grid grid-cols-3 md:flex md:justify-between
+        w-full items-center h-14 px-10
+        bg-[rgb(var(--color-background)/0.8)]
+        border-b
+        transition-colors duration-300
+        ${isScrolled ? "border-[var(--color-foreground-1)]" : "border-transparent"}
+      `}
     >
-      <div className="col-start-2 flex justify-center md:col-start-1 md:justify-start">
-        <a>
-          <h1>Logo</h1>
-        </a>
+      <div className="col-start-2 flex md:col-start-1 md:justify-start flex-shrink-0">
+        <Link href={"#home"}>
+          <div className="flex justify-center">
+            <div className="mr-2">
+              <Image
+                src="/images/logo/logo.png"
+                alt="Logo do site"
+                width={30}
+                height={30}
+              />
+            </div>
+            <div>
+              <span className="text-lg font-bold text-[var(--color-primary-1)]">
+                {"<"}
+              </span>
+              <span className="text-lg font-bold text-[var(--color-white-1)]">
+                Dilmar
+              </span>
+              <span className="text-lg font-bold text-[var(--color-primary-1)]">
+                {"/>"}
+              </span>
+            </div>
+          </div>
+        </Link>
       </div>
 
-      <nav className="hidden md:flex justify-between w-1/3">
+      <nav className="hidden md:flex justify-between">
         {menus.map((menu) => (
           <div
-            className={`flex items-center ${
-              menu.hasDetail ? "min-w-26" : "min-w-16"
-            }`}
+            className={"flex items-center justify-center min-w-25"}
             key={`menu-${menu.name}`}
           >
             <Link
               href={menu.link}
-              className="text-md font-semibold text-[var(--color-foreground)] hover:text-[var(--color-primary-1)] active:text-[var(--color-primary-2)] transition-colors"
+              className="font-semibold text-[var(--color-primary-font)] hover:text-[var(--color-primary-1)] active:text-[var(--color-primary-2)] transition-colors"
             >
               {tr(menu.name)}
             </Link>
@@ -136,32 +174,41 @@ export default function HeaderSection() {
                 icon={<ArrowDropDownIcon />}
                 sx={{
                   padding: 0,
-                  color: "var(--color-foreground)]",
+                  color: "var(--color-white-1)",
                   "&:hover": {
                     color: "var(--color-primary-1)",
                     backgroundColor: "transparent",
                   },
-                  "&:active": { color: "var(--color-primary-2)" },
+                  "&:active": { color: "var(--color-primary-1)" },
                 }}
               />
             )}
           </div>
         ))}
+        <div className="hidden md:flex min-w-45 bg-red">
+          <LocalButton
+            variant="contained"
+            typeButton="primary"
+            endIcon={<ArrowForwardIcon />}
+            label={tr("contact-me")}
+            sx={{
+              borderRadius: "9999px",
+              textTransform: "none",
+              paddingX: 2,
+              paddingY: 0.5,
+              fontWeight: "bold",
+              background: `
+                linear-gradient(
+                  90deg,
+                  var(--color-primary-1),
+                  var(--color-primary-2),
+                  var(--color-primary-3)
+                )
+              `,
+            }}
+          />
+        </div>
       </nav>
-      <div className="hidden md:flex">
-        <LocalButton
-          variant="contained"
-          typeButton="primary"
-          endIcon={<ArrowForwardIcon />}
-          label={tr("contact-me")}
-          sx={{
-            borderRadius: "9999px",
-            textTransform: "none",
-            paddingX: 2,
-            paddingY: 0.5,
-          }}
-        />
-      </div>
 
       <div className="block md:hidden col-start-3 flex justify-end">
         <LocalButtonMenu

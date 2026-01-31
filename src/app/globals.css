@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #080C16;
+  --color-background: 8 13 23;
   --color-background-2: #102533;
   --color-background-3: #0E2532;
   --color-background-4: #0D1323;
@@ -15,7 +15,7 @@
   --color-primary-3: #3FA9FF;
   --color-primary-4: #030047;
 
-  --color-secondary-1: #080D17;
+  --color-secondary-1: #080C16;
 
   --color-tertiary-1: #9B56FF;
 
@@ -33,8 +33,8 @@
 } */
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: rgb(var(--color-background));
+  color: var(--color-primary-font);
 }
 
 .section-content {
