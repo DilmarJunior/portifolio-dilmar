@@ -8,6 +8,8 @@ import { getTranslations } from "next-intl/server";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import HeaderSection from "./_sections/header";
 import "../globals.css";
+import LanguageButton from "./_components/languageButton";
+import LanguageButtonWrapper from "./_components/languageButton/LanguageButtonWrapper";
 
 type Props = {
   children: React.ReactNode;
@@ -70,6 +72,9 @@ export default async function LocaleLayout({
         <NextIntlClientProvider>
           <AppRouterCacheProvider>
             <HeaderSection />
+            <LanguageButtonWrapper>
+              <LanguageButton />
+            </LanguageButtonWrapper>
             <div className="pt-14">{children}</div>
           </AppRouterCacheProvider>
         </NextIntlClientProvider>

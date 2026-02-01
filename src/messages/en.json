@@ -1,4 +1,14 @@
 {
+  "languages": {
+    "pt": "Portuguese",
+    "en": "English",
+    "es": "Spanish",
+    "alt": {
+      "pt": "Brazil flag",
+      "en": "USA flag",
+      "es": "Spain flag"
+    }
+  },
   "metadata": {
     "meta-title": "Portifolio - Dilmar Mendes Silva Carvalho",
     "meta-description": "Portfolio of Dilmar Mendes Silva Carvalho, full stack mobile software developer. Includes projects, experiences, and professional resume."
