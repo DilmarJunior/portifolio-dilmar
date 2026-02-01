@@ -1,5 +1,5 @@
 "use client";
-import { LocalButtonProps } from "../types/LocalButtonProps";
+import { LocalButtonPropsType } from "../types/LocalButtonProps";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
@@ -20,7 +20,7 @@ type MenuItemType = {
   functionItem: () => void;
 };
 
-type LocalButtonMenuProps = LocalButtonProps & {
+type LocalButtonMenuProps = LocalButtonPropsType & {
   idMenu: string;
   listItems: MenuItemType[];
   menuProps?: MenuProps;

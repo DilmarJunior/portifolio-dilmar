@@ -1,7 +1,7 @@
 import { ButtonProps, IconButtonProps } from "@mui/material";
 import React from "react";
 
-export  type LocalButtonProps = ButtonProps & IconButtonProps & {
+export  type LocalButtonPropsType = ButtonProps & IconButtonProps & {
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   label?: string;

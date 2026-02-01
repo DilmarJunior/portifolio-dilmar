@@ -1,4 +1,4 @@
-export type MenuItem = {
+export type MenuItemType = {
   name: string;
   hasDetail: boolean;
   link: string;

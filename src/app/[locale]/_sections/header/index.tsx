@@ -8,7 +8,7 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Link from "next/link";
-import { MenuItem } from "@/app/[locale]/_components/types/MenuItem";
+import { MenuItemType } from "@/app/[locale]/_components/types/MenuItem";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -20,7 +20,7 @@ export default function HeaderSection() {
   };
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const menus: MenuItem[] = [
+  const menus: MenuItemType[] = [
     {
       name: "home",
       hasDetail: false,
@@ -69,7 +69,7 @@ export default function HeaderSection() {
     type: "normal",
   };
 
-  const getListItensMenuMobile = (menu: MenuItem[]) => {
+  const getListItensMenuMobile = (menu: MenuItemType[]) => {
     const newMenu = [...menu, menuItemContact];
 
     return newMenu.map((menu) => ({

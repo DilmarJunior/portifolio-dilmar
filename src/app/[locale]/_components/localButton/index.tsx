@@ -1,5 +1,5 @@
 import { Button, IconButton } from "@mui/material";
-import { LocalButtonProps } from "../types/LocalButtonProps";
+import { LocalButtonPropsType } from "../types/LocalButtonProps";
 
 export default function LocalButton({
   startIcon,
@@ -10,7 +10,7 @@ export default function LocalButton({
   icon,
   typeButton,
   ...props
-}: LocalButtonProps) {
+}: LocalButtonPropsType) {
   const objectTypeButton = {
     primary: {
       backgroundColor: "var(--color-primary-1)",
