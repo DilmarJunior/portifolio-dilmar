@@ -1,5 +1,6 @@
 "use client";
 import { LocalButtonPropsType } from "../types/LocalButtonProps";
+import { LocalMenuItem } from "../types/LocalMenuItem";
 import { useState } from "react";
 import Link from "next/link";
 import Button from "@mui/material/Button";
@@ -12,65 +13,121 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import IconButton from "@mui/material/IconButton";
 
-type MenuItemType = {
-  label: string;
-  type?: "normal" | "accordion";
-  style?: Record<string, unknown>;
-  icon?: React.ReactNode;
-  subItems?: MenuItemType[];
-  href?: string;
-  functionItem?: () => void;
-};
-
 type LocalButtonMenuProps = LocalButtonPropsType & {
   idMenu: string;
-  listItems: MenuItemType[];
-  menuProps?: MenuProps;
+  listItems: LocalMenuItem[];
+  menuProps?: Partial<MenuProps>;
   menuItemProps?: MenuItemProps;
-  iconButtonStyle?: object;
+  iconButtonStyle?: React.CSSProperties;
   slotPropsListMenuStyle?: Record<string, unknown>;
   onOpen?: () => void;
   onClose?: () => void;
 };
 
-export default function LocalButtonMenu({
-  id,
-  idMenu,
-  startIcon,
-  endIcon,
-  label,
-  isIconButton = false,
-  icon,
-  listItems,
-  iconButtonStyle,
-  slotPropsListMenuStyle,
-  menuProps,
-  onOpen,
-  onClose,
-  ...props
-}: LocalButtonMenuProps) {
+const paperSlotSx = {
+  borderRadius: 2,
+  padding: 0.2,
+  backgroundColor: "var(--color-foreground-2)",
+};
+
+const accordionSx = {
+  "&::before": { display: "none" },
+  border: "none",
+  boxShadow: "none",
+};
+
+const accordionSummarySx = {
+  transition: "box-shadow 0.2s ease",
+  minHeight: "35px",
+  height: "40px",
+  "&.Mui-expanded": {
+    minHeight: "35px",
+    height: "40px",
+    boxShadow: "0px 4px 6px -2px rgba(0,0,0,0.25)",
+    zIndex: 2,
+  },
+  "& .MuiAccordionSummary-expandIconWrapper": {
+    color: "var(--color-primary-1)",
+  },
+  "&.Mui-expanded .MuiAccordionSummary-expandIconWrapper": {
+    color: "var(--color-primary-2)",
+  },
+  backgroundColor: "var(--color-background-5)",
+  color: "var(--color-primary-font)",
+};
+
+const accordionDetailsSx = {
+  padding: "5px 0px 5px 0px",
+  borderBottom: "1px solid var(--color-foreground-1)",
+  backgroundColor: "var(--color-background-6)",
+  color: "var(--color-primary-font)",
+};
+
+const normalItemBaseSx = {
+  minHeight: "40px",
+  backgroundColor: "var(--color-background-5)",
+  color: "var(--color-primary-font)",
+};
+
+export default function LocalButtonMenu(props: LocalButtonMenuProps) {
+  const {
+    id,
+    idMenu,
+    listItems,
+    iconButtonStyle,
+    slotPropsListMenuStyle,
+    menuProps,
+    menuItemProps,
+    onOpen,
+    onClose,
+  } = props;
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = menuProps?.open ?? Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-    onOpen?.();
+    if (onOpen) {
+      onOpen();
+    }
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    onClose?.();
+    if (onClose) {
+      onClose();
+    }
   };
 
-  return (
-    <div>
-      {isIconButton ? (
+  const renderTrigger = () => {
+    if (props.isIconButton) {
+      const {
+        id: _id,
+        idMenu: _idMenu,
+        listItems: _listItems,
+        iconButtonStyle: _iconButtonStyle,
+        slotPropsListMenuStyle: _slotPropsListMenuStyle,
+        menuProps: _menuProps,
+        menuItemProps: _menuItemProps,
+        onOpen: _onOpen,
+        onClose: _onClose,
+        isIconButton: _isIconButton,
+        icon,
+        startIcon: _startIcon,
+        endIcon: _endIcon,
+        label: _label,
+        typeButton: _typeButton,
+        functionPress: _functionPress,
+        ...iconRest
+      } = props;
+
+      return (
         <IconButton
           aria-controls={open ? idMenu : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          {...props}
+          {...iconRest}
           style={{
             color: "var(--color-primary-font)",
             ...iconButtonStyle,
@@ -78,20 +135,48 @@ export default function LocalButtonMenu({
         >
           {icon}
         </IconButton>
-      ) : (
-        <Button
-          id={id}
-          aria-controls={open ? idMenu : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-          startIcon={startIcon}
-          endIcon={endIcon}
-          {...props}
-        >
-          {label}
-        </Button>
-      )}
+      );
+    }
+
+    const {
+      id: _id,
+      idMenu: _idMenu,
+      listItems: _listItems,
+      iconButtonStyle: _iconButtonStyle,
+      slotPropsListMenuStyle: _slotPropsListMenuStyle,
+      menuProps: _menuProps,
+      menuItemProps: _menuItemProps,
+      onOpen: _onOpen,
+      onClose: _onClose,
+      isIconButton: _isIconButton,
+      icon: _icon,
+      startIcon,
+      endIcon,
+      label,
+      typeButton: _typeButton,
+      functionPress: _functionPress,
+      ...btnRest
+    } = props;
+
+    return (
+      <Button
+        id={id}
+        aria-controls={open ? idMenu : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+        startIcon={startIcon}
+        endIcon={endIcon}
+        {...btnRest}
+      >
+        {label}
+      </Button>
+    );
+  };
+
+  return (
+    <div>
+      {renderTrigger()}
 
       <Menu
         id={idMenu}
@@ -99,13 +184,7 @@ export default function LocalButtonMenu({
         open={open}
         onClose={handleClose}
         slotProps={{
-          paper: {
-            sx: {
-              borderRadius: 2,
-              padding: 0.2,
-              backgroundColor: "var(--color-foreground-2)",
-            },
-          },
+          paper: { sx: paperSlotSx },
           list: {
             "aria-labelledby": id,
             sx: {
@@ -119,59 +198,19 @@ export default function LocalButtonMenu({
       >
         {listItems.map((listItem) =>
           listItem.type === "accordion" ? (
-            <Accordion
-              key={listItem.label}
-              sx={{
-                "&::before": {
-                  display: "none",
-                },
-                border: "none",
-                boxShadow: "none",
-              }}
-            >
+            <Accordion key={listItem.label} sx={accordionSx}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1-content"
-                id="panel1-header"
-                sx={{
-                  transition: "box-shadow 0.2s ease",
-                  minHeight: "35px",
-                  height: "40px",
-
-                  "&.Mui-expanded": {
-                    minHeight: "35px",
-                    height: "40px",
-                    boxShadow: "0px 4px 6px -2px rgba(0,0,0,0.25)",
-                    zIndex: 2,
-                  },
-
-                  "& .MuiAccordionSummary-expandIconWrapper": {
-                    color: "var(--color-primary-1)",
-                  },
-
-                  "&.Mui-expanded .MuiAccordionSummary-expandIconWrapper": {
-                    color: "var(--color-primary-2)",
-                  },
-
-                  backgroundColor: "var(--color-background-5)",
-                  color: "var(--color-primary-font)",
-                }}
+                aria-controls={`panel-${listItem.label}-content`}
+                id={`panel-${listItem.label}-header`}
+                sx={accordionSummarySx}
               >
                 <Typography component="span">{listItem.label}</Typography>
               </AccordionSummary>
 
               {listItem.subItems?.map((subItem) => (
-                <AccordionDetails
-                  key={subItem.label}
-                  sx={{
-                    padding: "5px 0px 5px 0px",
-                    borderBottom: "1px solid var(--color-foreground-1)",
-                    backgroundColor: "var(--color-background-6)",
-                    color: "var(--color-primary-font)",
-                  }}
-                >
+                <AccordionDetails key={subItem.label} sx={accordionDetailsSx}>
                   <MenuItem
-                    key={subItem.label}
                     {...(subItem.href
                       ? { component: Link, href: subItem.href }
                       : {})}
@@ -181,11 +220,11 @@ export default function LocalButtonMenu({
                       }
                       handleClose();
                     }}
-                    {...props.menuItemProps}
+                    {...menuItemProps}
                     sx={{ ...subItem.style }}
                   >
                     {subItem.label}
-                    {subItem.icon && subItem.icon}
+                    {subItem.icon}
                   </MenuItem>
                 </AccordionDetails>
               ))}
@@ -202,16 +241,14 @@ export default function LocalButtonMenu({
                 }
                 handleClose();
               }}
-              {...props.menuItemProps}
+              {...menuItemProps}
               sx={{
-                minHeight: "40px",
-                backgroundColor: "var(--color-background-5)",
-                color: "var(--color-primary-font)",
+                ...normalItemBaseSx,
                 ...listItem.style,
               }}
             >
               {listItem.label}
-              {listItem.icon && listItem.icon}
+              {listItem.icon}
             </MenuItem>
           ),
         )}

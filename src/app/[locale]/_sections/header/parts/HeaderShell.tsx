@@ -1,9 +1,13 @@
 "use client";
 
-import { useHeaderScroll } from "../hooks/useHeaderScroll";
+import { useScrolled } from "@/hooks/useScrolled";
 
-export default function HeaderShell({ children }: { children: React.ReactNode }) {
-  const isScrolled = useHeaderScroll();
+export default function HeaderShell({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const isScrolled = useScrolled();
 
   return (
     <header

@@ -1,58 +1,75 @@
 import { Button, IconButton } from "@mui/material";
 import { LocalButtonPropsType } from "../types/LocalButtonProps";
 
-export default function LocalButton({
-  startIcon,
-  endIcon,
-  label,
-  functionPress,
-  isIconButton,
-  icon,
-  typeButton,
-  ...props
-}: LocalButtonPropsType) {
-  const objectTypeButton = {
-    primary: {
-      backgroundColor: "var(--color-primary-1)",
-      color: "var(--color-secondary-1 )",
-      backgroundHover: "var(--color-primary-2)",
-      backgroundActive: "var(--color-primary-3)",
-      borderColor: "var(--color-primary-1)",
-    },
-    secondary: {
-      backgroundColor: "var(--color-secondary-1)",
-      color: "var(--color-primary-1)",
-      backgroundHover: "var(--color-secondary-2)",
-      backgroundActive: "var(--color-secondary-3)",
-      borderColor: "var(--color-primary-1)",
-    },
-  };
+const typeButtonStyles = {
+  primary: {
+    backgroundColor: "var(--color-primary-1)",
+    color: "var(--color-secondary-1)",
+    backgroundHover: "var(--color-primary-2)",
+    backgroundActive: "var(--color-primary-3)",
+    borderColor: "var(--color-primary-1)",
+  },
+  secondary: {
+    backgroundColor: "var(--color-secondary-1)",
+    color: "var(--color-primary-1)",
+    backgroundHover: "var(--color-secondary-2)",
+    backgroundActive: "var(--color-secondary-3)",
+    borderColor: "var(--color-primary-1)",
+  },
+} as const;
 
-  return isIconButton ? (
-    <IconButton onClick={functionPress} {...props}>
-      {icon}
-    </IconButton>
-  ) : (
+export default function LocalButton(props: LocalButtonPropsType) {
+  if (props.isIconButton) {
+    const {
+      isIconButton: _isIconButton,
+      icon,
+      functionPress,
+      label: _label,
+      typeButton: _typeButton,
+      ...rest
+    } = props;
+    return (
+      <IconButton onClick={functionPress} {...rest}>
+        {icon}
+      </IconButton>
+    );
+  }
+
+  const {
+    startIcon,
+    endIcon,
+    label,
+    functionPress,
+    typeButton,
+    sx,
+    isIconButton: _isIconButton,
+    icon: _icon,
+    ...rest
+  } = props;
+
+  const style = typeButton ? typeButtonStyles[typeButton] : null;
+
+  return (
     <Button
       onClick={functionPress}
       startIcon={startIcon}
       endIcon={endIcon}
-      {...props}
+      {...rest}
       sx={{
-        ...(typeButton
+        ...(style
           ? {
-              backgroundColor: objectTypeButton[typeButton].backgroundColor,
-              color: objectTypeButton[typeButton].color,
-              border: objectTypeButton[typeButton].borderColor,
+              backgroundColor: style.backgroundColor,
+              color: style.color,
+              border: `1px solid ${style.borderColor}`,
               "&:hover": {
-                backgroundColor: objectTypeButton[typeButton].backgroundHover,
+                backgroundColor: style.backgroundHover,
               },
               "&:active": {
-                backgroundColor: objectTypeButton[typeButton].backgroundActive,
+                backgroundColor: style.backgroundActive,
               },
             }
           : {}),
-        ...props.sx,
+        ...sx,
       }}
     >
       {label}

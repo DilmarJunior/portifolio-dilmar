@@ -1,36 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Button from "@mui/material/Button";
 import Image from "next/image";
 import LanguageModal from "../languageModal";
 import { LanguageOptionsType } from "../types/LanguageOptions";
-
-type SupportedLocale = "pt" | "en" | "es";
+import { type SupportedLocale } from "@/i18n/routing";
 
 export default function LanguageButton() {
   const locale = useLocale() as SupportedLocale;
   const tr = useTranslations();
   const [modalOpen, setModalOpen] = useState(false);
 
-  const languageOptions: LanguageOptionsType = {
-    pt: {
-      language: tr("languages.pt"),
-      flag: "brazilian",
-      alt: tr("languages.alt.pt"),
-    },
-    en: {
-      language: tr("languages.en"),
-      flag: "eua",
-      alt: tr("languages.alt.en"),
-    },
-    es: {
-      language: tr("languages.es"),
-      flag: "spanish",
-      alt: tr("languages.alt.es"),
-    },
-  };
+  const languageOptions = useMemo<LanguageOptionsType>(
+    () => ({
+      pt: {
+        language: tr("languages.pt"),
+        flag: "brazilian",
+        alt: tr("languages.alt.pt"),
+      },
+      en: {
+        language: tr("languages.en"),
+        flag: "eua",
+        alt: tr("languages.alt.en"),
+      },
+      es: {
+        language: tr("languages.es"),
+        flag: "spanish",
+        alt: tr("languages.alt.es"),
+      },
+    }),
+    [tr],
+  );
 
   const currentOption = languageOptions[locale];
 

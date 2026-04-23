@@ -1,5 +1,6 @@
 "use client";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { routing, type SupportedLocale } from "@/i18n/routing";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -7,9 +8,7 @@ import Image from "next/image";
 import { LanguageModalType } from "../types/LanguageModal";
 import LocalModal from "../localModal";
 
-type SupportedLocale = "pt" | "en" | "es";
-
-const LOCALE_ORDER: SupportedLocale[] = ["pt", "en", "es"];
+const LOCALE_ORDER: readonly SupportedLocale[] = routing.locales;
 
 export default function LanguageModal({
   open,

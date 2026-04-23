@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useScrolled } from "@/hooks/useScrolled";
 
 type LanguageButtonWrapperProps = {
   children: React.ReactNode;
@@ -9,18 +9,7 @@ type LanguageButtonWrapperProps = {
 export default function LanguageButtonWrapper({
   children,
 }: LanguageButtonWrapperProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const isScrolled = useScrolled();
 
   return (
     <div

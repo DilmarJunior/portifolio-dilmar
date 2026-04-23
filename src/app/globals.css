@@ -24,6 +24,13 @@
   --color-white-2: #F5F5F5;
 
   --color-primary-font: #A3B0C1;
+
+  --gradient-primary: linear-gradient(
+    90deg,
+    var(--color-primary-1),
+    var(--color-primary-2),
+    var(--color-primary-3)
+  );
 }
 
 /* @media (prefers-color-scheme: dark) {

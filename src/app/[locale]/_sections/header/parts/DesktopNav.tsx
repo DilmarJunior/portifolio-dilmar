@@ -61,14 +61,7 @@ export default async function DesktopNav() {
             paddingX: 2,
             paddingY: 0.5,
             fontWeight: "bold",
-            background: `
-              linear-gradient(
-                90deg,
-                var(--color-primary-1),
-                var(--color-primary-2),
-                var(--color-primary-3)
-              )
-            `,
+            background: "var(--gradient-primary)",
           }}
         />
       </div>

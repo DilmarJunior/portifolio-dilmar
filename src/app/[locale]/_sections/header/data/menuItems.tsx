@@ -13,13 +13,7 @@ export const menuItemContact: MenuItemType = {
   hasDetail: false,
   link: "#contact-me",
   style: {
-    background: `
-      linear-gradient(
-        90deg,
-        var(--color-primary-1),
-        var(--color-primary-2),
-        var(--color-primary-3)
-      )`,
+    background: "var(--gradient-primary)",
     color: "var(--color-secondary-1)",
     minHeight: "45px",
     borderBottomLeftRadius: 2,

@@ -12,6 +12,7 @@ export default function Logo() {
               alt="Logo do site"
               width={30}
               height={30}
+              priority
               className="w-[30px] h-[30px] max-w-none"
             />
           </div>
