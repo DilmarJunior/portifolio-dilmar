@@ -1,6 +1,7 @@
 "use client";
 import { LocalButtonPropsType } from "../types/LocalButtonProps";
 import { useState } from "react";
+import Link from "next/link";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem, { MenuItemProps } from "@mui/material/MenuItem";
@@ -17,7 +18,8 @@ type MenuItemType = {
   style?: Record<string, unknown>;
   icon?: React.ReactNode;
   subItems?: MenuItemType[];
-  functionItem: () => void;
+  href?: string;
+  functionItem?: () => void;
 };
 
 type LocalButtonMenuProps = LocalButtonPropsType & {
@@ -158,7 +160,7 @@ export default function LocalButtonMenu({
                 <Typography component="span">{listItem.label}</Typography>
               </AccordionSummary>
 
-              {listItem.subItems?.map((subItem, index) => (
+              {listItem.subItems?.map((subItem) => (
                 <AccordionDetails
                   key={subItem.label}
                   sx={{
@@ -170,8 +172,13 @@ export default function LocalButtonMenu({
                 >
                   <MenuItem
                     key={subItem.label}
+                    {...(subItem.href
+                      ? { component: Link, href: subItem.href }
+                      : {})}
                     onClick={() => {
-                      subItem.functionItem();
+                      if (subItem.functionItem) {
+                        subItem.functionItem();
+                      }
                       handleClose();
                     }}
                     {...props.menuItemProps}
@@ -186,8 +193,13 @@ export default function LocalButtonMenu({
           ) : (
             <MenuItem
               key={listItem.label}
+              {...(listItem.href
+                ? { component: Link, href: listItem.href }
+                : {})}
               onClick={() => {
-                listItem.functionItem();
+                if (listItem.functionItem) {
+                  listItem.functionItem();
+                }
                 handleClose();
               }}
               {...props.menuItemProps}
