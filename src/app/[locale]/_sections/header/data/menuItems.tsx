@@ -25,6 +25,7 @@ export const menuItemContact: MenuItemType = {
     borderBottomLeftRadius: 2,
     borderBottomRightRadius: 2,
     fontWeight: "bold",
+    justifyContent: "space-between",
   },
   icon: <ArrowForwardIcon />,
   type: "normal",

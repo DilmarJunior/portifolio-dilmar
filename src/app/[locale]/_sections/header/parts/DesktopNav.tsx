@@ -54,6 +54,8 @@ export default async function DesktopNav() {
           endIcon={<ArrowForwardIcon />}
           label={tr("contact-me")}
           sx={{
+            width: "180px",
+            justifyContent: "space-between",
             borderRadius: "9999px",
             textTransform: "none",
             paddingX: 2,
