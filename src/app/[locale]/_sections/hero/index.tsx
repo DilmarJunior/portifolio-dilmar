@@ -1,7 +1,16 @@
+"use client";
+import { useTranslations } from "next-intl";
 import BackgroundGlow from "@/app/[locale]/_components/backgroundGlow";
+import TerminalGreeting from "./parts/TerminalGreeting";
+import { motion, useReducedMotion } from "motion/react";
+import { fullVariants, reducedVariants } from "@/utils/constants";
 
 export default function HeroSection() {
-
+  const tr = useTranslations("hero");
+  const reduced = useReducedMotion();
+  const { container, fadeUp, } = reduced
+    ? reducedVariants
+    : fullVariants;
 
   return (
     <section
@@ -13,6 +22,23 @@ export default function HeroSection() {
       `}
     >
       <BackgroundGlow />
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="visible"
+        className={`
+          relative z-10
+          flex flex-col items-center text-center
+          gap-5 px-6
+          max-w-4xl mx-auto
+        `}
+      >
+        <TerminalGreeting
+          variants={fadeUp}
+          path={tr("portfolio")}
+          command={tr("hello-world")}
+        />
+      </motion.div>
     </section>
   );
 }
