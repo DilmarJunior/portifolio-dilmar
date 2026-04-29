@@ -75,7 +75,7 @@ export default async function LocaleLayout({
             <LanguageButtonWrapper>
               <LanguageButton />
             </LanguageButtonWrapper>
-            <div className="pt-14">{children}</div>
+            <div className="pt-18">{children}</div>
           </AppRouterCacheProvider>
         </NextIntlClientProvider>
       </body>
