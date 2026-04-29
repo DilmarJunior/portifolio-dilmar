@@ -24,5 +24,23 @@
   "got-to-details-resume": "Ir para detalhes de currículo",
   "got-to-section-about": "Ir para seção sobre",
   "got-to-section-projects": "Ir para seção de projetos",
-  "got-to-section-resume": "Ir para seção de currículo"
+  "got-to-section-resume": "Ir para seção de currículo",
+  "hero": {
+    "greeting": "Olá, eu sou",
+    "role": "Desenvolvedor Mobile Fullstack",
+    "description": "Especialista em <h>Flutter</h> e <h>React Native</h>, criando experiências móveis performáticas e escaláveis.",
+    "cta": {
+      "projects": "Ver Projetos",
+      "contact": "Entre em Contato"
+    },
+    "social": {
+      "github": "Abrir GitHub",
+      "linkedin": "Abrir LinkedIn",
+      "email": "Enviar e-mail"
+    },
+    "avatar-alt": "Foto de Dilmar Carvalho",
+    "scroll": "Rolar para a próxima seção",
+    "portfolio": "portifólio",
+    "hello-world": "olá mundo!"
+  }
 }
