@@ -4,13 +4,14 @@ import BackgroundGlow from "@/app/[locale]/_components/backgroundGlow";
 import TerminalGreeting from "./parts/TerminalGreeting";
 import Avatar from "./parts/Avatar";
 import Heading from "./parts/Heading";
+import Subtitle from "./parts/Subtitle";
 import { motion, useReducedMotion } from "motion/react";
 import { fullVariants, reducedVariants } from "@/utils/constants";
 
 export default function HeroSection() {
   const tr = useTranslations("hero");
   const reduced = useReducedMotion();
-  const { container, fadeUp, fadeScale, } = reduced
+  const { container, fadeUp, fadeScale } = reduced
     ? reducedVariants
     : fullVariants;
 
@@ -42,6 +43,7 @@ export default function HeroSection() {
         />
         <Avatar variants={fadeScale} alt={tr("avatar-alt")} />
         <Heading variants={fadeUp} greeting={tr("greeting")} />
+        <Subtitle variants={fadeUp} role={tr("role")} />
       </motion.div>
     </section>
   );
