@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import BackgroundGlow from "@/app/[locale]/_components/backgroundGlow";
 import TerminalGreeting from "./parts/TerminalGreeting";
 import Avatar from "./parts/Avatar";
+import Heading from "./parts/Heading";
 import { motion, useReducedMotion } from "motion/react";
 import { fullVariants, reducedVariants } from "@/utils/constants";
 
@@ -40,6 +41,7 @@ export default function HeroSection() {
           command={tr("hello-world")}
         />
         <Avatar variants={fadeScale} alt={tr("avatar-alt")} />
+        <Heading variants={fadeUp} greeting={tr("greeting")} />
       </motion.div>
     </section>
   );
