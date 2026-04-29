@@ -2,13 +2,14 @@
 import { useTranslations } from "next-intl";
 import BackgroundGlow from "@/app/[locale]/_components/backgroundGlow";
 import TerminalGreeting from "./parts/TerminalGreeting";
+import Avatar from "./parts/Avatar";
 import { motion, useReducedMotion } from "motion/react";
 import { fullVariants, reducedVariants } from "@/utils/constants";
 
 export default function HeroSection() {
   const tr = useTranslations("hero");
   const reduced = useReducedMotion();
-  const { container, fadeUp, } = reduced
+  const { container, fadeUp, fadeScale, } = reduced
     ? reducedVariants
     : fullVariants;
 
@@ -38,6 +39,7 @@ export default function HeroSection() {
           path={tr("portfolio")}
           command={tr("hello-world")}
         />
+        <Avatar variants={fadeScale} alt={tr("avatar-alt")} />
       </motion.div>
     </section>
   );
