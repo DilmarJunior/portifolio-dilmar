@@ -25,12 +25,13 @@
 
   --color-primary-font: #A3B0C1;
 
-  --gradient-primary: linear-gradient(
-    90deg,
-    var(--color-primary-1),
-    var(--color-primary-2),
-    var(--color-primary-3)
-  );
+  --gradient-primary: linear-gradient(90deg,
+      var(--color-primary-1),
+      var(--color-primary-2),
+      var(--color-primary-3));
+
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -43,6 +44,23 @@
 body {
   background: rgb(var(--color-background));
   color: var(--color-primary-font);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  @apply font-bold tracking-tight;
+}
+
+code,
+pre,
+.font-mono {
+  font-family: var(--font-mono);
 }
 
 .section-content {
