@@ -18,7 +18,13 @@ export default async function DesktopNav() {
         >
           <Link
             href={menu.link}
-            className="font-semibold text-[var(--color-primary-font)] hover:text-[var(--color-primary-1)] active:text-[var(--color-primary-2)] transition-colors"
+            className={`
+              font-semibold
+              text-[var(--color-primary-font)]
+              hover:text-[var(--color-primary-1)]
+              active:text-[var(--color-primary-2)]
+              transition-colors
+            `}
           >
             {tr(menu.name)}
           </Link>

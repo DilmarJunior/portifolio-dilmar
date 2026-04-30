@@ -40,7 +40,11 @@ export default function LanguageButton() {
     <>
       <Button
         variant="outlined"
-        className="!min-w-0 !p-0 !rounded-full !border-0 !bg-transparent hover:!bg-[rgb(var(--color-foreground-1)/0.08)]"
+        className={`
+          !min-w-0 !p-0 !rounded-full
+          !border-0 !bg-transparent
+          hover:!bg-[rgb(var(--color-foreground-1)/0.08)]
+        `}
         onClick={() => setModalOpen(true)}
       >
         <span className="flex w-8 h-8 rounded-full overflow-hidden p-1 shrink-0">
